@@ -59,9 +59,6 @@ const GlobalStyle = createGlobalStyle`
   input {
     outline: none;
   }
-  li {
-    list-style: none;
-  }
 `;
 
 export default GlobalStyle;

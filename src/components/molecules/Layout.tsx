@@ -13,7 +13,6 @@ const Layout = () => {
       <Main>
         <Sidebar />
         <Content>
-          <h1>Content</h1>
           <Outlet />
         </Content>
         <GenAI>Gen AI</GenAI>
@@ -41,7 +40,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1280px;
+  max-width: 1480px;
   margin: 0 auto;
 `;
 
@@ -50,7 +49,7 @@ const Main = styled.section`
   grid-template-areas: 'sidebar content gen-ai';
   grid-template-columns: 250px 1fr 300px;
   flex: 1;
-  max-width: 1280px;
+  max-width: 1480px;
   margin: 0 auto;
   width: 100%;
 `;

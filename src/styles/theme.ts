@@ -178,7 +178,7 @@ const color = {
   },
   tint: {
     red: '#FF0000',
-    yellow: '#FF8B04',
+    yellow: '#FF7B5A',
     white: '#FFFFFF',
   },
 };
