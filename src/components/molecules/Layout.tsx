@@ -1,10 +1,11 @@
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { Sidebar } from './index';
+import { ScrollToTop, Sidebar } from './index';
 
 const Layout = () => {
   return (
     <LayoutContainer>
+      <ScrollToTop />
       <Header>
         <HeaderContainer>
           <Link to="/">Git Ready</Link>
