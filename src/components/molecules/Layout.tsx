@@ -32,7 +32,6 @@ const LayoutContainer = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  padding: 1rem;
   font-size: 32px;
   border-bottom: 1px solid #dcdee3;
 `;
@@ -48,7 +47,7 @@ const HeaderContainer = styled.div`
 const Main = styled.section`
   display: grid;
   grid-template-areas: 'sidebar content gen-ai';
-  grid-template-columns: 250px 1fr 300px;
+  grid-template-columns: 250px 1fr 200px;
   flex: 1;
   max-width: 1480px;
   margin: 0 auto;
@@ -57,7 +56,7 @@ const Main = styled.section`
 
 const Content = styled.main`
   grid-area: content;
-  padding: 1rem;
+
   border-left: 1px solid #dcdee3;
   border-right: 1px solid #dcdee3;
 `;
