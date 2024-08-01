@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './components/molecules';
 
-import { GitMergePage, HomePage, QuizPage } from './pages';
+import { GitCommitPage, GitMergePage, HomePage, QuizPage } from './pages';
 
 export const router = createBrowserRouter([
   {
@@ -13,13 +13,13 @@ export const router = createBrowserRouter([
         errorElement: <div>Unknown Error</div>,
       },
       {
-        path: '/quiz',
-        element: <QuizPage />,
+        path: '/git-merge',
+        element: <GitMergePage />,
         errorElement: <div>Unknown Error</div>,
       },
       {
-        path: '/git-merge',
-        element: <GitMergePage />,
+        path: '/git-commit',
+        element: <GitCommitPage />,
         errorElement: <div>Unknown Error</div>,
       },
     ],
