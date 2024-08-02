@@ -1,7 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './components/molecules';
 
-import { GitCommitPage, GitMergePage, HomePage, QuizPage } from './pages';
+import {
+  GitAdvanced1Page,
+  GitCommitPage,
+  GitMergePage,
+  HomePage,
+} from './pages';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +25,11 @@ export const router = createBrowserRouter([
       {
         path: '/git-commit',
         element: <GitCommitPage />,
+        errorElement: <div>Unknown Error</div>,
+      },
+      {
+        path: '/git-advanced-1',
+        element: <GitAdvanced1Page />,
         errorElement: <div>Unknown Error</div>,
       },
     ],

@@ -23,9 +23,6 @@ const Sidebar = () => {
           <NavItem $isActive={isActive('/git-init')}>
             <StyledLink to="/git-init">git 저장소 생성</StyledLink>
           </NavItem>
-          <NavItem $isActive={isActive('/git-config')}>
-            <StyledLink to="/git-config">사용자 정보 설정</StyledLink>
-          </NavItem>
           <NavItem $isActive={isActive('/git-stage')}>
             <StyledLink to="/git-stage">파일 스테이징</StyledLink>
           </NavItem>
@@ -56,6 +53,15 @@ const Sidebar = () => {
           </NavItem>
           <NavItem $isActive={isActive('/git-restore')}>
             <StyledLink to="/git-restore">파일 되돌리기</StyledLink>
+          </NavItem>
+        </NavSection>
+        <NavSection>
+          <SectionTitle>Git 고급</SectionTitle>
+          <HorizontalLine />
+          <NavItem $isActive={isActive('/git-advanced-1')}>
+            <StyledLink to="/git-advanced-1">
+              feature 브랜치 생성 및 병합
+            </StyledLink>
           </NavItem>
         </NavSection>
       </Nav>

@@ -1,6 +1,6 @@
 import HomePage from './HomePage';
-import QuizPage from './QuizPage';
 import GitMergePage from './GitMergePage';
 import GitCommitPage from './GitCommitPage';
+import GitAdvanced1Page from './GItAdvanced1Page';
 
-export { HomePage, QuizPage, GitMergePage, GitCommitPage };
+export { HomePage, GitMergePage, GitCommitPage, GitAdvanced1Page };
