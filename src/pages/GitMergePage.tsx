@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { GraphItem } from '../types/git';
 import { BoldText, RegularText, Snackbar } from '../components/atoms';
 import { theme } from '../styles/theme';
 import { GitSimulator } from '../components/organisms';
 import { GitGraphVisualizer } from '../components/molecules';
+import { S } from '../styles/CommonGitPageStyles';
 
 const GitMergePage = () => {
   const [graph, setGraph] = useState<GraphItem[]>([
@@ -36,11 +36,7 @@ const GitMergePage = () => {
     ]);
   };
 
-  const handleCheckoutOrSwitch = (
-    command: string,
-    subCommand: string,
-    branchName: string,
-  ) => {
+  const handleCheckoutOrSwitch = (command: string, branchName: string) => {
     if (branchName === 'master' || branchName === 'develop') {
       if (branch === branchName) {
         addCommand(command, `Already on '${branchName}'`, branch);
@@ -101,7 +97,7 @@ const GitMergePage = () => {
       case 'checkout':
       case 'switch':
         if (branchName) {
-          handleCheckoutOrSwitch(command, subCommand, branchName);
+          handleCheckoutOrSwitch(command, branchName);
         } else {
           addCommand(
             command,
@@ -131,12 +127,12 @@ const GitMergePage = () => {
   };
 
   return (
-    <Container>
-      <ProblemContainer>
-        <GitGraphContainer>
+    <S.Container>
+      <S.ProblemContainer>
+        <S.GitGraphContainer>
           <GitGraphVisualizer graph={graph} />
-        </GitGraphContainer>
-        <TextContainer>
+        </S.GitGraphContainer>
+        <S.TextContainer>
           <RegularText
             size={16}
             color="#b22222"
@@ -161,18 +157,20 @@ const GitMergePage = () => {
             개발은 develop 브랜치에서 이루어집니다. <br /> 최근에 다음과 같은
             작업이 진행되었습니다.
           </RegularText>
-          <List>
-            <ListItem>
+          <S.List>
+            <S.ListItem>
               master 브랜치에서 develop 브랜치를 생성했습니다.
-            </ListItem>
-            <ListItem>
+            </S.ListItem>
+            <S.ListItem>
               develop 브랜치에서 두 개의 주요 기능이 구현되었습니다.
-              <SubList>
-                <SubListItem>첫 번째 커밋: 검색창 컴포넌트 개발</SubListItem>
-                <SubListItem>두 번째 커밋: 검색 api 구현</SubListItem>
-              </SubList>
-            </ListItem>
-          </List>
+              <S.SubList>
+                <S.SubListItem>
+                  첫 번째 커밋: 검색창 컴포넌트 개발
+                </S.SubListItem>
+                <S.SubListItem>두 번째 커밋: 검색 api 구현</S.SubListItem>
+              </S.SubList>
+            </S.ListItem>
+          </S.List>
           <RegularText
             size={16}
             color={theme.color.gray.main}
@@ -188,77 +186,30 @@ const GitMergePage = () => {
           >
             제약 사항
           </BoldText>
-          <SubList>
-            <SubListItem>각 브랜치는 최신 상태입니다.</SubListItem>
-            <SubListItem>현재 develop 브랜치에 위치하고 있습니다.</SubListItem>
-            <SubListItem>충돌은 발생하지 않는다고 가정합니다.</SubListItem>
-          </SubList>
-        </TextContainer>
-      </ProblemContainer>
-      <PromptContainer>
+          <S.SubList>
+            <S.SubListItem>각 브랜치는 최신 상태입니다.</S.SubListItem>
+            <S.SubListItem>
+              현재 develop 브랜치에 위치하고 있습니다.
+            </S.SubListItem>
+            <S.SubListItem>충돌은 발생하지 않는다고 가정합니다.</S.SubListItem>
+          </S.SubList>
+        </S.TextContainer>
+      </S.ProblemContainer>
+      <S.PromptContainer>
         <GitSimulator
           commands={commands}
           branch={branch}
           handleCommand={handleCommand}
           isInputDisabled={isInputDisabled}
         />
-      </PromptContainer>
+      </S.PromptContainer>
       <Snackbar
         message="정답입니다 🥳"
         show={showSnackbar}
         onClose={() => setShowSnackbar(false)}
       />
-    </Container>
+    </S.Container>
   );
 };
 
 export default GitMergePage;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ProblemContainer = styled.div`
-  display: flex;
-  height: 45rem;
-  border-bottom: 1px solid #dcdee3;
-`;
-
-const GitGraphContainer = styled.div`
-  width: 50%;
-  border-right: 1px solid #dcdee3;
-  display: flex;
-`;
-
-const TextContainer = styled.div`
-  width: 50%;
-  padding: 2rem;
-`;
-
-const List = styled.ol`
-  margin-top: 1rem;
-  padding-left: 2rem;
-`;
-
-const ListItem = styled.li`
-  margin-bottom: 1rem;
-  ${theme.font.regular16}
-  color: #ff6347;
-`;
-
-const SubList = styled.ul`
-  list-style: disc inside;
-  padding-left: 1rem;
-`;
-
-const SubListItem = styled.li`
-  margin-bottom: 0.1rem;
-  ${theme.font.regular16}
-`;
-
-const PromptContainer = styled.div`
-  display: flex;
-  height: 20rem;
-  border-bottom: 1px solid #dcdee3;
-`;

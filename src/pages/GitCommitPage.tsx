@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { GraphItem } from '../types/git';
 import { BoldText, RegularText, Snackbar } from '../components/atoms';
 import { theme } from '../styles/theme';
 import { GitSimulator } from '../components/organisms';
 import { GitGraphVisualizer } from '../components/molecules';
+import { S } from '../styles/CommonGitPageStyles';
 
 const GitCommitPage = () => {
   const [graph, setGraph] = useState<GraphItem[]>([
@@ -28,6 +28,15 @@ const GitCommitPage = () => {
       ...prevCommands,
       { command, result, branch },
     ]);
+  };
+
+  const handleAdd = (command: string) => {
+    if (stagedFiles) {
+      addCommand(command, `Files are already staged`, branch);
+    } else {
+      setStagedFiles(true);
+      addCommand(command, `Files added to staging area`, branch);
+    }
   };
 
   const handleCommit = (command: string, message: string) => {
@@ -68,12 +77,7 @@ const GitCommitPage = () => {
     switch (subCommand) {
       case 'add':
         if (argument === '.') {
-          if (stagedFiles) {
-            addCommand(command, `Files are already staged`, branch);
-          } else {
-            setStagedFiles(true);
-            addCommand(command, `Files added to staging area`, branch);
-          }
+          handleAdd(command);
         } else {
           addCommand(
             command,
@@ -103,12 +107,12 @@ const GitCommitPage = () => {
   };
 
   return (
-    <Container>
-      <ProblemContainer>
-        <GitGraphContainer>
+    <S.Container>
+      <S.ProblemContainer>
+        <S.GitGraphContainer>
           <GitGraphVisualizer graph={graph} />
-        </GitGraphContainer>
-        <TextContainer>
+        </S.GitGraphContainer>
+        <S.TextContainer>
           <RegularText
             size={16}
             color="#b22222"
@@ -131,11 +135,11 @@ const GitCommitPage = () => {
             당신은 웹사이트 프로젝트를 진행하고 있는 개발자입니다. <br />
             최근에 다음과 같은 작업이 진행되었습니다.
           </RegularText>
-          <List>
-            <ListItem>
+          <S.List>
+            <S.ListItem>
               master 브랜치에서 두 개의 커밋이 이루어졌습니다.
-            </ListItem>
-          </List>
+            </S.ListItem>
+          </S.List>
           <RegularText
             size={16}
             color={theme.color.gray.main}
@@ -150,77 +154,31 @@ const GitCommitPage = () => {
           >
             제약 사항
           </BoldText>
-          <SubList>
-            <SubListItem>
+          <S.SubList>
+            <S.SubListItem>
+              현재 디렉토리 내에 스테이징할 파일이 존재합니다.
+            </S.SubListItem>
+            <S.SubListItem>
               커밋 메시지는 원하는 대로 작성하셔도 됩니다.
-            </SubListItem>
-          </SubList>
-        </TextContainer>
-      </ProblemContainer>
-      <PromptContainer>
+            </S.SubListItem>
+          </S.SubList>
+        </S.TextContainer>
+      </S.ProblemContainer>
+      <S.PromptContainer>
         <GitSimulator
           commands={commands}
           branch={branch}
           handleCommand={handleCommand}
           isInputDisabled={isInputDisabled}
         />
-      </PromptContainer>
+      </S.PromptContainer>
       <Snackbar
         message="정답입니다 🥳"
         show={showSnackbar}
         onClose={() => setShowSnackbar(false)}
       />
-    </Container>
+    </S.Container>
   );
 };
 
 export default GitCommitPage;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ProblemContainer = styled.div`
-  display: flex;
-  height: 45rem;
-  border-bottom: 1px solid #dcdee3;
-`;
-
-const GitGraphContainer = styled.div`
-  width: 50%;
-  border-right: 1px solid #dcdee3;
-  display: flex;
-`;
-
-const TextContainer = styled.div`
-  width: 50%;
-  padding: 2rem;
-`;
-
-const List = styled.ol`
-  margin-top: 1rem;
-  padding-left: 2rem;
-`;
-
-const ListItem = styled.li`
-  margin-bottom: 1rem;
-  ${theme.font.regular16}
-  color: #ff6347;
-`;
-
-const SubList = styled.ul`
-  list-style: disc inside;
-  padding-left: 1rem;
-`;
-
-const SubListItem = styled.li`
-  margin-bottom: 0.1rem;
-  ${theme.font.regular16}
-`;
-
-const PromptContainer = styled.div`
-  display: flex;
-  height: 20rem;
-  border-bottom: 1px solid #dcdee3;
-`;
