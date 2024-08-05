@@ -1,6 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { ScrollToTop, Sidebar } from './index';
+import { ChatBot } from '../organisms';
 
 const Layout = () => {
   return (
@@ -16,7 +17,11 @@ const Layout = () => {
         <Content>
           <Outlet />
         </Content>
-        <GenAI>Gen AI</GenAI>
+        <GenAI>
+          <StickyContainer>
+            <ChatBot />
+          </StickyContainer>
+        </GenAI>
       </Main>
     </LayoutContainer>
   );
@@ -47,7 +52,7 @@ const HeaderContainer = styled.div`
 const Main = styled.section`
   display: grid;
   grid-template-areas: 'sidebar content gen-ai';
-  grid-template-columns: 250px 1fr 200px;
+  grid-template-columns: 250px 949px 300px;
   flex: 1;
   max-width: 1480px;
   margin: 0 auto;
@@ -56,13 +61,17 @@ const Main = styled.section`
 
 const Content = styled.main`
   grid-area: content;
-
   border-left: 1px solid #dcdee3;
   border-right: 1px solid #dcdee3;
 `;
 
 const GenAI = styled.div`
   grid-area: gen-ai;
-  background-color: #d3d3d3;
+  background-color: #f3e6ff;
   padding: 1rem;
+`;
+
+const StickyContainer = styled.div`
+  position: sticky;
+  top: 1rem;
 `;

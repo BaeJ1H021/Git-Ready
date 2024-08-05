@@ -6,6 +6,7 @@ import GitCommand from './GitCommand';
 import GitHub from './GitHub';
 import ScrollToTop from './ScrollToTop';
 import GitGraphVisualizer from './GitGraphVisualizer';
+import ChatbotMessage from './ChatbotMessage';
 
 export {
   Layout,
@@ -16,4 +17,5 @@ export {
   GitHub,
   ScrollToTop,
   GitGraphVisualizer,
+  ChatbotMessage,
 };
